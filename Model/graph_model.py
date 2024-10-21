@@ -210,7 +210,6 @@ class GraphModel(torch.nn.Module):
         self.pe_dim = pe_dim
         self.pe_lin = Linear(20, pe_dim)
         self.pe_norm = BatchNorm1d(20)
-        self.edge_emb = Embedding(in_edge_features + time_embed_dim, channels)
         self.model_type = model_type
         self.shuffle_ind = shuffle_ind
         self.d_state = d_state
