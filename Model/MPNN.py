@@ -12,6 +12,10 @@ from e3nn.nn import BatchNorm
 class TensorProductConvLayer(torch.nn.Module):
     def __init__(self, in_irreps, sh_irreps, out_irreps, n_edge_features, residual=True, batch_norm=True):
         super(TensorProductConvLayer, self).__init__()
+        """
+        Part of this is code taken from GeoMol https://github.com/gcorso/torsional-diffusion
+     
+       """
         self.in_irreps = in_irreps
         self.out_irreps = out_irreps
         self.sh_irreps = sh_irreps
