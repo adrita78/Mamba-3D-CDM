@@ -107,8 +107,8 @@ class MPNNModel(torch.nn.Module):
 
     def forward(self, data):
       node_attr, edge_index, edge_attr, edge_sh = self.build_conv_graph(data)
-      print("Shape of node_attr being passed:", node_attr.shape)
-      print("Shape of edge_attr being passed:", edge_attr.shape)
+      #print("Shape of node_attr being passed:", node_attr.shape)
+      #print("Shape of edge_attr being passed:", edge_attr.shape)
       src, dst = edge_index
       node_attr = self.node_embedding(node_attr)
       edge_attr = self.edge_embedding(edge_attr)
