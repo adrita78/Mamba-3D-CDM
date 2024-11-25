@@ -48,7 +48,7 @@ class TensorProductConvLayer(torch.nn.Module):
 
 
 class MPNNModel(torch.nn.Module):
-    def __init__(self, channels= 64, in_node_features=64, in_edge_features=80, sh_lmax=2, ns=32, nv=8, num_conv_layers=4, max_radius=5, radius_embed_dim=50,use_second_order_repr=True, batch_norm=True, residual=True
+    def __init__(self, channels= 64, in_node_features=64, in_edge_features= 64, sh_lmax=2, ns=32, nv=8, num_conv_layers=4, max_radius=5, radius_embed_dim=50,use_second_order_repr=True, batch_norm=True, residual=True
                  ):
         super(MPNNModel, self).__init__()
         self.max_radius = max_radius
