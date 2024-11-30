@@ -17,6 +17,7 @@ import os.path as osp
 import torch, tqdm
 import copy
 from torch_geometric.data import Dataset, DataLoader
+from utils.featurize import featurize_mol
 from torch_geometric.transforms import BaseTransform
 from collections import defaultdict
 import math
