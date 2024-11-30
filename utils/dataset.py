@@ -17,7 +17,7 @@ import os.path as osp
 import torch, tqdm
 import copy
 from torch_geometric.data import Dataset, DataLoader
-from utils.featurize import featurize_mol
+from utils.featurization import featurize_mol
 from torch_geometric.transforms import BaseTransform
 from collections import defaultdict
 import math
@@ -26,6 +26,11 @@ from functools import cache
 class MambaDataset(Dataset):
     def __init__(self, root, split_path, mode, types, dataset, cache = None , transform=None, num_workers=1, limit_molecules=None, max_confs= 10):
         super(MambaDataset, self).__init__(root, transform)
+
+    """
+    Part of the featurisation code taken from Torsional Diffusion https://github.com/adrita78/torsional-diffusion
+    Returns:
+    """
         self.root = root
         self.types = types
         self.failures = defaultdict(int)
