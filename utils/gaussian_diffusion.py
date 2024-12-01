@@ -87,6 +87,9 @@ def _extract_into_tensor(arr, timesteps, broadcast_shape):
 
     return extracted
 
+
+
+
 # define beta schedule
 betas = get_named_beta_schedule(schedule_name = "cosine" , num_diffusion_timesteps= 1000 ,beta_start =  0.0001 , beta_end=0.02 )
 betas = np.array(betas, dtype=np.float64)
