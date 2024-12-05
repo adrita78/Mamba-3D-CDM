@@ -99,10 +99,10 @@ class Regressor(torch.nn.Module):
     def bernoulli_likelihood(mean_output, optimal_value):
       return torch.exp(mean_output - optimal_value)
 
-    def compute_score_function(x_t, model, goal_value):
+    def compute_score_function(x_t, model, optimal_value):
       x_t = x_t.requires_grad_(True)
       mean_output, _ = model(x_t)
-      likelihood = bernoulli_likelihood(mean_output, goal_value)
+      likelihood = bernoulli_likelihood(mean_output, optimal_value)
       log_likelihood = torch.log(likelihood + 1e-6)
       log_likelihood.sum().backward()
       return x_t.grad
