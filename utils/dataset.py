@@ -28,7 +28,7 @@ class MambaDataset(Dataset):
         super(MambaDataset, self).__init__(root, transform)
 
     """
-    Part of the code taken from Torsional Diffusion https://github.com/adrita78/torsional-diffusion
+    Part of the code taken from Torsional Diffusion https://github.com/gcorso/torsional-diffusion
     Returns:
     """
         self.root = root
