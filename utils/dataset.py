@@ -29,7 +29,7 @@ class MambaDataset(Dataset):
 
     """
     Part of the code taken from Torsional Diffusion https://github.com/gcorso/torsional-diffusion
-    Returns:
+    
     """
         self.root = root
         self.types = types
