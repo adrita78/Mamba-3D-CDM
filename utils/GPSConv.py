@@ -113,7 +113,6 @@ class GPSConv(torch.nn.Module):
         batch: Optional[torch.Tensor] = None,
         **kwargs,
     ) -> Tensor:
-        r"""Runs the forward pass of the module."""
         hs = []
         if self.conv is not None:  # Local MPNN.
             y,x = self.conv(h, x, **kwargs)
