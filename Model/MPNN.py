@@ -12,8 +12,8 @@ from utils.MPNN_utils import TensorProductConvLayer, GaussianSmearing
 
 
 class MPNNModel(torch.nn.Module):
-    def __init__(self, channels: int, in_node_features:int, in_edge_features:int, sh_lmax:int, ns:int, nv:int, num_conv_layers:int, max_radius:int, radius_embed_dim:int ,use_second_order_repr=True, batch_norm=True, residual=True
-                 ):
+    def __init__(self, channels: int, in_node_features:int, in_edge_features:int, sh_lmax:int, ns:int, nv:int, num_conv_layers:int, 
+                 max_radius:int, radius_embed_dim:int ,use_second_order_repr=True, batch_norm=True, residual=True):
         super(MPNNModel, self).__init__()
                      
         """
