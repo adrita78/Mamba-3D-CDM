@@ -23,11 +23,6 @@ from utils.GPSConv import GPSConv
 import torch.nn.functional as F
 from torch import Tensor
 from torch.nn import Dropout, Linear, Sequential
-from torch_geometric.utils import to_dense_batch
-
-from mamba_ssm import Mamba
-from torch_geometric.utils import degree, sort_edge_index
-import torch_sparse
 
 
 class GraphModel(torch.nn.Module):
