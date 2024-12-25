@@ -18,6 +18,7 @@ import gc
 from torch_geometric.nn import global_add_pool
 import inspect
 from typing import Any, Dict, Optional
+from utils.GPSConv import GPSConv
 
 import torch.nn.functional as F
 from torch import Tensor
