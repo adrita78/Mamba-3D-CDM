@@ -26,9 +26,9 @@ from torch.nn import Dropout, Linear, Sequential
 
 
 class GraphModel(torch.nn.Module):
-    def __init__(self, channels: int, in_node_nf: int, out_node_nf: int, in_edge_nf: int, hidden_nf: int, pe_dim: int, context_dim: int, time_embed_dim: int, num_layers: int, model_type: str, shuffle_ind: int, d_state: int, d_conv: int, order_by_degree: False):
+    def __init__(self, channels: int, in_node_nf: int, out_node_nf: int, in_edge_nf: int, hidden_nf: int, pe_dim: int, context_dim: int, 
+                 time_embed_dim: int, num_layers: int, model_type: str, shuffle_ind: int, d_state: int, d_conv: int, order_by_degree: False):
         super().__init__()
-
         self.node_emb = Linear(64, channels - pe_dim - time_embed_dim - context_dim)
         self.context_emb = Linear(64, context_dim)
         self.context_dim = context_dim
