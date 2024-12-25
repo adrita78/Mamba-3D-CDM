@@ -8,6 +8,7 @@ from torch_cluster import radius, radius_graph
 from torch_scatter import scatter
 import numpy as np
 from e3nn.nn import BatchNorm
+from utils.MPNN_utils import TensorProductConvLayer, GaussianSmearing
 
 
 class MPNNModel(torch.nn.Module):
