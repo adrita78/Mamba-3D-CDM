@@ -1,11 +1,6 @@
 import msgpack
 import os
 import numpy as np
-from rdkit import Chem
-from rdkit.Chem.rdchem import HybridizationType
-from rdkit.Chem.rdchem import BondType as BT
-from rdkit.Chem.rdchem import ChiralType
-from rdkit.Chem import AllChem
 from types import SimpleNamespace
 from multiprocessing import Pool
 
