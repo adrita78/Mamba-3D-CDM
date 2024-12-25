@@ -125,7 +125,7 @@ class GPSConv(torch.nn.Module):
                 else:
                     y = self.norm1(y)
             hs.append(y)
-            print("shape of hs from MPNN:", h.shape)
+            
 
         ### Global attention transformer-style model.
         if self.att_type == 'transformer':
@@ -151,7 +151,7 @@ class GPSConv(torch.nn.Module):
                     y_i = self.self_attn(y_i)[mask][y_ind_perm]
                     mamba_arr.append(y_i)
                 y = sum(mamba_arr) / self.shuffle_ind
-                print("Shape of h from mamba:", y.shape)
+                
 
                 # Averages the results from all shuffled versions to produce the final node representations.
         ###
