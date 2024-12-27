@@ -28,6 +28,7 @@ from torch_geometric.nn.resolver import (
     normalization_resolver,
 )
 from torch_geometric.typing import Adj
+from utils.permute_within_batch import permute_within_batch
 
 class GPSConv(torch.nn.Module):
 
