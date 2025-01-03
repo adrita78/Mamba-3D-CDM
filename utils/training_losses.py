@@ -1,3 +1,7 @@
+import numpy as np
+import torch.nn.functional as F
+import torch as th
+from utils.losses import mean_flat_graph and ph_loss
 
 def training_losses(model, x_start, t,loss_type, index,condition, c= 0.0, device = None, model_kwargs=None, noise=None):
         """
@@ -35,8 +39,8 @@ def training_losses(model, x_start, t,loss_type, index,condition, c= 0.0, device
         if loss_type == "MSE":
 
 
-            terms["guide"] = mean_flat((model_output-x_start) ** 2, batch)
-            terms["iter"] = mean_flat((model_output-condition) ** 2, batch)
+            terms["guide"] = mean_flat_graph((model_output-x_start) ** 2, batch)
+            terms["iter"] = mean_flat_graph((model_output-condition) ** 2, batch)
 
 
             #model.module.update_xbar(model_output,index)
