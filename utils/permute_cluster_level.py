@@ -35,9 +35,3 @@ def permute_by_clusters(edge_index, num_nodes):
 
     return torch.tensor(permuted_indices)
 
-# Example usage
-n_nodes = 31
-n_edges = 66
-edge_index = torch.randint(0, n_nodes, (2, n_edges))
-permuted_nodes = permute_by_clusters(edge_index, n_nodes)
-print(permuted_nodes)
