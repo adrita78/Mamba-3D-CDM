@@ -31,9 +31,3 @@ def prioritize_by_eigenvector_centrality(edge_index, num_nodes):
 
     return prioritized_nodes
 
-# Example usage
-n_nodes = 31
-n_edges = 66
-edge_index = edge_index = torch.randint(0, n_nodes, (2, n_edges))
-prioritized_nodes = prioritize_by_eigenvector_centrality(edge_index, n_nodes)
-print(prioritized_nodes)
