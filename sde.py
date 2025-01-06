@@ -28,12 +28,10 @@ class VPSDE(SDE):
         if noise is None:
             noise = th.randn_like(x_start)
 
-        # Ensure broadcastable shapes
         broadcast_shape = x_start.shape
         sqrt_alpha_tensor = _extract_into_tensor(self.sqrt_alphas_cumprod, t, broadcast_shape)
         sqrt_one_minus_alpha_tensor = _extract_into_tensor(self.sqrt_one_minus_alphas_cumprod, t, broadcast_shape)
 
-        # Compute noisy x_t
         perturbed_x = sqrt_alpha_tensor * x_start + sqrt_one_minus_alpha_tensor * noise
         return perturbed_x
 
