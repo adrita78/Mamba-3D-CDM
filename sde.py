@@ -68,17 +68,12 @@ class VP_Diffusion:
     def __init__(
         self,
         betas,
-        loss_type,
-        c = 0.0,
         beta_start=0.1, 
         beta_max=0.999, 
         N=1000, 
         schedule_name="cosine"
     ):
        
-        self.loss_type = loss_type
-        self.c = c
-
         # Use float64 for accuracy.
         betas = np.array(betas, dtype=np.float64)
         self.betas = betas
