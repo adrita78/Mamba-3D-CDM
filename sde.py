@@ -133,3 +133,26 @@ class VP_Diffusion:
         mean = th.exp(log_mean_coeff[:, None, None]) * x
         std = th.sqrt(1.0 - th.exp(2.0 * log_mean_coeff))
         return mean, std
+
+
+def _extract_into_tensor(arr, timesteps, broadcast_shape):
+    """
+    Extract values from `arr` based on `timesteps`, expanding to `broadcast_shape`.
+    """
+
+    if timesteps.ndimension() == 0:
+        timesteps = timesteps.unsqueeze(0)
+
+    if len(broadcast_shape) > 1:
+        broadcast_shape = (timesteps.shape[0],) + (1,) * (len(broadcast_shape) - 1)
+    arr = torch.tensor(arr, dtype=torch.float32)
+    try:
+        extracted = arr[timesteps.long()]
+        if extracted.numel() == 1:
+            extracted = extracted.view(1)
+        else:
+            extracted = extracted.view(*broadcast_shape)
+    except Exception as e:
+        raise e
+
+    return extracted
