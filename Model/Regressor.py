@@ -86,4 +86,47 @@ def get_regressor_fn(sde, model):
 
     return regressor_fn
 
+class GuidanceScore(torch.nn.Module):
+    def __init__(self, sde, Regressor, betas, N=1000, T=1):
+        super().__init__()
+        self.sde = sde
+        self.regressor = get_regressor_fn(sde, Regressor)
+        self.betas = betas
+        self.N = N
+        self.T = T
 
+    def forward(self, x, edge_index, t ):
+        """
+        Compute the integral for the provided inputs.
+
+        Args:
+            x: Node features (torch.Tensor).
+            edge_index: Graph edges (torch.Tensor).
+            optimal_value: Optimal target value for likelihood computation.
+
+        Returns:
+            integral: Approximated value of the integral.
+        """
+        with torch.enable_grad():
+            x_para = torch.nn.Parameter(x)
+        dt = 1 / self.N  
+        integral = 0.0  
+        timestep = (t * (self.N - 1) / self.T).long()  
+        beta = self.betas[timestep] 
+        F, _ = self.regressor(x_para, edge_index, t)
+        if isinstance(F, list):
+          F = torch.stack(F, dim=0).mean(dim=0)
+        likelihood = bernoulli_likelihood(F, optimal_value)
+        log_likelihood = torch.log(likelihood + 1e-6)
+        log_likelihood.sum().backward()
+        grad_log_prob = x_para.grad.clone() 
+        x_para.grad.zero_() 
+        integral += beta * grad_log_prob * dt
+
+        return integral
+
+
+def bernoulli_likelihood(mean_value, optimal_value):
+      
+      output = torch.exp(mean_value - optimal_value)
+      return output / (1 + output)
