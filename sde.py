@@ -9,9 +9,6 @@ import torch as th
 import enum
 import math
 
-import numpy as np
-import torch as th
-
 def get_named_beta_schedule(schedule_name, num_diffusion_timesteps,beta_start,beta_end):
     """
     scheduler for VP model
