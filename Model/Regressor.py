@@ -75,3 +75,14 @@ class RegressorEnsemble(torch.nn.Module):
 
         return preds, embeds
 
+
+def get_regressor_fn(sde, model):
+    if not isinstance(sde, VPSDE):
+        raise ValueError(f"Expected VPSDE, but got {sde.__class__.__name__}")
+
+    def regressor_fn(x, edge_index, t):
+        pred, embed = model(x, edge_index)
+        return pred, embed
+
+    return regressor_fn
+
