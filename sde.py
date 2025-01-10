@@ -5,9 +5,8 @@ import requests
 import gc
 import numpy as np
 import torch as th
-
 import enum
-import math
+
 
 def get_named_beta_schedule(schedule_name, num_diffusion_timesteps,beta_start,beta_end):
     """
