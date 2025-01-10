@@ -50,7 +50,7 @@ def betas_for_alpha_bar(num_diffusion_timesteps, alpha_bar, max_beta=0.999):
     return np.array(betas)
 
 
-class VP_Diffusion:
+class VPSDE:
     """
     Utilities for training and sampling diffusion models.
 
