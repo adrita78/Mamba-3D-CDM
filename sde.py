@@ -128,6 +128,68 @@ class VPSDE:
         std = th.sqrt(1.0 - th.exp(2.0 * log_mean_coeff))
         return mean, std
 
+    
+     def p_sample(self, model, x_T, T, x_bar,model_kwargs=None):
+        """
+        Sample x_{t-1} from the model at the given timestep.
+
+        :param model: the model to sample from.
+        :param x: the current tensor at x_{t-1}.
+        :param t: the value of t, starting at 0 for the first diffusion step.
+        :param clip_denoised: if True, clip the x_start prediction to [-1, 1].
+        :param denoised_fn: if not None, a function which applies to the
+            x_start prediction before it is used to sample.
+        :param model_kwargs: if not None, a dict of extra keyword arguments to
+            pass to the model. This can be used for conditioning.
+        :return: a dict containing the following keys:
+                 - 'sample': a random sample from the model.
+                 - 'pred_xstart': a prediction of x_0.
+        """
+        
+        sample = x_T - model(x_T, T, context=x_bar,**model_kwargs)
+        sample = sample.clamp(-1, 1)
+        return sample
+
+     def p_sample_loop(
+        self,
+        model,
+        shape,
+        noise=None,
+        condition=None,
+        model_kwargs=None,
+        device=None,
+        sample_steps=1,
+        
+    ):
+        """
+        Generate samples from the model and yield intermediate samples from
+        each timestep of diffusion.
+
+        Arguments are the same as p_sample_loop().
+        Returns a generator over dicts, where each dict is the return value of
+        p_sample().
+        """
+        if device is None:
+            device = next(model.parameters()).device
+        assert isinstance(shape, (tuple, list))
+       
+        x_T = th.randn(*shape, device=device)
+        x_bar = th.randn(*shape, device=device)
+        T = th.tensor([self.num_timesteps] * shape[0], device=device)
+
+        for i in range(sample_steps):
+            with th.no_grad():
+                out = self.p_sample(
+                    model,
+                    x_T,
+                    x_bar,
+                    T,
+                    model_kwargs=model_kwargs,
+                )
+                x_bar = out
+               
+        return x_bar
+
 
 def _extract_into_tensor(arr, timesteps, broadcast_shape):
     """
